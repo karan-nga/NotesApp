@@ -9,4 +9,5 @@
     <color name="white">#FFFFFFFF</color>
     <color name="light_gray">#a2a2a2</color>
     <color name="highlight_text_color">#2196F3</color>
+    <color name="error_color">#FF0202</color>
 </resources>

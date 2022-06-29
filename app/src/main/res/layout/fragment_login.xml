@@ -7,9 +7,9 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
+        android:orientation="vertical"
         android:paddingTop="32dp"
         android:paddingBottom="60dp">
 
@@ -100,10 +100,10 @@
         <Button
             android:id="@+id/btn_login"
             style="@style/Widget.Material3.Button"
-            android:backgroundTint="@color/black"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
+            android:backgroundTint="@color/black"
             android:fontFamily="@font/sf_pro_display_bold"
             android:text="@string/txt_login"
             android:textAllCaps="true"
@@ -120,18 +120,14 @@
             android:text="@string/txt_no_account_signup"
             android:textSize="14sp" />
 
-        <com.github.ybq.android.spinkit.SpinKitView
-            android:visibility="gone"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
+        <com.github.ybq.android.spinkit.SpinKitView xmlns:app="http://schemas.android.com/apk/res-auto"
             android:id="@+id/progress_bar"
-            android:indeterminate="true"
             style="@style/SpinKitView.ThreeBounce"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:indeterminate="true"
+            android:visibility="gone"
             app:SpinKit_Color="@color/black" />
-
     </LinearLayout>
-
-
 </ScrollView>
