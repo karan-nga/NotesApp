@@ -13,19 +13,27 @@ import androidx.navigation.fragment.findNavController
 import com.rawtooth.dailynotes.databinding.FragmentRegisterBinding
 import com.rawtooth.dailynotes.models.UserRequest
 import com.rawtooth.dailynotes.utils.NetworksHandling
+import com.rawtooth.dailynotes.utils.TokenManager
 import com.rawtooth.dailynotes.viewModel.AuthViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class RegisterFragment : Fragment() {
 
     lateinit var resgisterBinding: FragmentRegisterBinding
     private val authViewModel by viewModels<AuthViewModel>()
+    //token
+    @Inject
+    lateinit var tokenManager: TokenManager
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         resgisterBinding = FragmentRegisterBinding.inflate(inflater, container, false)
+        if(tokenManager.getToken()!=null){
+            findNavController().navigate(R.id.action_registerFragment_to_mainFragment)
+        }
         return resgisterBinding.root
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -67,6 +75,7 @@ class RegisterFragment : Fragment() {
             resgisterBinding.progressBar.isVisible = false
             when (it) {
                 is NetworksHandling.Success -> {
+                    tokenManager.saveToken(it.data!!.token)
                     findNavController().navigate(R.id.action_registerFragment_to_mainFragment)
                 }
                 is NetworksHandling.Error -> {

@@ -96,7 +96,7 @@
             android:fontFamily="@font/sf_pro_display_regular"
             android:text=""
             android:textColor="@color/error_color"
-            android:textSize="15sp" />
+            android:textSize="13sp" />
 
         <Button
             android:id="@+id/btn_login"

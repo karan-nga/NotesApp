@@ -12,19 +12,27 @@ import androidx.navigation.fragment.findNavController
 import com.rawtooth.dailynotes.databinding.FragmentLoginBinding
 import com.rawtooth.dailynotes.models.UserRequest
 import com.rawtooth.dailynotes.utils.NetworksHandling
+import com.rawtooth.dailynotes.utils.TokenManager
 import com.rawtooth.dailynotes.viewModel.AuthViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class LoginFragment : Fragment() {
     private var _binding: FragmentLoginBinding?=null
     private val  binding get()=_binding!!
     private val authViewMode by viewModels<AuthViewModel>()
+    //token
+    @Inject
+    lateinit var tokenManager: TokenManager
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
             _binding= FragmentLoginBinding.inflate(inflater,container,false)
+        if(tokenManager.getToken()!=null){
+            findNavController().navigate(R.id.action_loginFragment_to_mainFragment)
+        }
         return binding.root
     }
 
@@ -50,6 +58,7 @@ class LoginFragment : Fragment() {
             binding.progressBar.isVisible=false
             when(it){
                 is NetworksHandling.Success ->{
+                    tokenManager.saveToken(it.data!!.token)
                     findNavController().navigate(R.id.action_loginFragment_to_mainFragment)
                 }
                 is NetworksHandling.Error ->{

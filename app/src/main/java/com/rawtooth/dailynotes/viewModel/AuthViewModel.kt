@@ -33,7 +33,7 @@ class AuthViewModel @Inject constructor(private val userRepository: UserReposito
     fun validateCredentials(username:String,email:String,password:String,isLogin:Boolean): Pair<Boolean,String>{
         var result=Pair(true,"")
         if((!isLogin&&TextUtils.isEmpty(username))||TextUtils.isEmpty(email)||TextUtils.isEmpty(password)){
-            result=Pair(false,"PLease provides all details")
+            result=Pair(false,"Please provides all details")
         }
         else if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
             result=Pair(false,"Please provides valid email")
